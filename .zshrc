@@ -1,5 +1,12 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -8,7 +15,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+ZVM_CURSOR_STYLE_ENABLED=false
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -71,9 +79,11 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-	git
-	zsh-autosuggestions
+  git
+  z
+  zsh-autosuggestions
   zsh-syntax-highlighting
+  zsh-vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -104,33 +114,27 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-
 alias b="cd .."
 alias py="python3"
 alias vim="nvim"
-alias ll="exa --icons -l"
+alias ll="eza --icons -l"
 alias lla="ll -a"
 alias c="clear"
 alias lg="lazygit"
 alias gs="git status"
 alias dc="docker compose"
-
-# z direcotry jumper
-. /Users/mahaveersoni/.zsh/z.sh
-
-# homebrew eval
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
-# exports
-export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
-export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
+alias deg="docker exec -it gisapi-gisapi-1"
+alias aiesec-prod="ssh -i ~/.ssh/aiesec-commutatus.pem ec2-user@52.31.113.191"
+alias aiesec-stage="ssh -i ~/.ssh/aiesec-commutatus.pem ec2-user@52.16.200.62"
+alias auth-prod="ssh -i ~/.ssh/aiesec-commutatus.pem ec2-user@34.247.27.133"
 export PATH="$HOME/.local/bin":$PATH
+# export LDFLAGS="-L/opt/homebrew/opt/openssl@1.1/lib"
+# export CPPFLAGS="-I/opt/homebrew/opt/openssl@1.1/include"
 
-export PATH="$PATH:$HOME/.rvm/bin"
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+eval "$(/opt/homebrew/bin/brew shellenv)"
+. "$HOME/.asdf/asdf.sh"
 
-export JAVA_HOME="$(/usr/libexec/java_home)"
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
