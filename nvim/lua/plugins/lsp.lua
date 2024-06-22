@@ -202,6 +202,7 @@ return {
           'tailwindcss-language-server',
           'typescript-language-server',
           'yaml-language-server',
+          'markdownlint',
         },
       })
       -- You can add other tools here that you want Mason to install

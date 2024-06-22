@@ -225,9 +225,4 @@ return {
     event = 'VeryLazy',
     opts = {},
   },
-
-  -- copilot
-  {
-    'github/copilot.vim',
-  },
 }
