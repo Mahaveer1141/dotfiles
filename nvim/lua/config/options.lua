@@ -94,8 +94,22 @@ vim.opt.wrap = false -- No Wrap lines
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
 vim.cmd([[let &t_Ce = "\e[4:0m"]])
 
-vim.cmd([[autocmd FileType cpp,java,python set tabstop=4]])
-vim.cmd([[autocmd FileType cpp,java,python set shiftwidth=4]])
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'cpp', 'java', 'python' },
+  callback = function()
+    vim.opt_local.tabstop = 4
+    vim.opt_local.shiftwidth = 4
+  end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'go',
+  callback = function()
+    vim.opt_local.expandtab = false
+    vim.opt_local.tabstop = 4
+    vim.opt_local.shiftwidth = 4
+  end,
+})
 
 vim.cmd([[au BufNewFile,BufRead *.astro setf astro]])
 vim.cmd([[au BufNewFile,BufRead Podfile setf ruby]])

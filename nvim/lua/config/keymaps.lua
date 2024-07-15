@@ -4,8 +4,7 @@ local opts = { noremap = true, silent = true }
 -- remove yank of x
 keymap.set('n', 'x', '"_x')
 
--- move code up and down
-keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
+-- move code up and down keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 
 -- Increment/decrement

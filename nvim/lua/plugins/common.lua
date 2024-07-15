@@ -11,6 +11,14 @@ return {
       local prehook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook()
       require('Comment').setup({
         pre_hook = prehook,
+        toggler = {
+          line = '<C-/>',
+          block = '<leader>/',
+        },
+        opleader = {
+          line = '<C-/>',
+          block = '<leader>/',
+        },
       })
     end,
     event = 'BufReadPre',
