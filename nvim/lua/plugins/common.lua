@@ -233,4 +233,10 @@ return {
     event = 'VeryLazy',
     opts = {},
   },
+
+  -- Syntax highlighting for Slim in VIM
+  {
+    'slim-template/vim-slim',
+    ft = 'slim',
+  },
 }

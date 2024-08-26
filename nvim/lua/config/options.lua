@@ -139,3 +139,9 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.opt.conceallevel = 0
   end,
 })
+
+-- set file type on buffer creation and reading for slim
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
+  pattern = { '*.slim' },
+  command = 'set ft=slim',
+})
