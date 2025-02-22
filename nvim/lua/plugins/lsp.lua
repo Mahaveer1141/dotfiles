@@ -114,7 +114,15 @@ return {
             return require('lspconfig.util').root_pattern('.git')(...)
           end,
         },
-        solargraph = {},
+        typos_lsp = {
+          settings = {
+            init_options = {
+              diagnosticSeverity = 'Warning',
+            },
+            diagnosticSeverity = 'Warning',
+          },
+        },
+        ruby_lsp = {},
         rubocop = {},
         tsserver = {
           root_dir = vim.loop.cwd,
