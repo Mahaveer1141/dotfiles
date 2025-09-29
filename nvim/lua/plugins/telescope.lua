@@ -22,6 +22,7 @@ return {
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+      { 'nvim-telescope/telescope-file-browser.nvim' },
     },
     config = function()
       require('telescope').setup({
@@ -58,9 +59,29 @@ return {
         ';f',
         function()
           local builtin = require('telescope.builtin')
+          local actions = require('telescope.actions')
+          local action_state = require('telescope.actions.state')
+
           builtin.find_files({
             no_ignore = false,
             hidden = true,
+            attach_mappings = function(prompt_bufnr, map)
+              local open_in_tab = function()
+                local entry = action_state.get_selected_entry()
+                actions.close(prompt_bufnr)
+                -- entry.path is common; fall back to filename/value
+                local path = entry.path or entry.filename or entry.value
+                if path then
+                  -- create a new tab and edit the file safely (escape name)
+                  vim.cmd('tabnew ' .. vim.fn.fnameescape(path))
+                end
+              end
+
+              -- map Enter to our new-tab opener in both insert and normal modes
+              map('i', '<CR>', open_in_tab)
+              map('n', '<CR>', open_in_tab)
+              return true
+            end,
           })
         end,
         desc = 'Lists files in your current working directory, respects .gitignore',
@@ -144,6 +165,36 @@ return {
           builtin.find_files({ cwd = vim.fn.stdpath('config') })
         end,
         desc = '[S]earch [N]eovim files)',
+      },
+      {
+        ';c',
+        function()
+          local builtin = require('telescope.builtin')
+          builtin.lsp_incoming_calls()
+        end,
+        desc = 'Lists LSP incoming calls for word under the cursor',
+      },
+      {
+        'sf',
+        function()
+          local telescope = require('telescope')
+
+          local function telescope_buffer_dir()
+            return vim.fn.expand('%:p:h')
+          end
+
+          telescope.extensions.file_browser.file_browser({
+            path = '%:p:h',
+            cwd = telescope_buffer_dir(),
+            respect_gitignore = false,
+            hidden = true,
+            grouped = true,
+            previewer = false,
+            initial_mode = 'normal',
+            layout_config = { height = 40 },
+          })
+        end,
+        desc = 'Open File Browser with the path of the current buffer',
       },
     },
   },

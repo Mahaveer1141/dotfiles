@@ -239,4 +239,10 @@ return {
     'slim-template/vim-slim',
     ft = 'slim',
   },
+
+  -- Copilot package
+  {
+    'github/copilot.vim',
+    version = '1.41.0',
+  },
 }

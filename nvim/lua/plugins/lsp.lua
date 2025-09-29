@@ -122,7 +122,6 @@ return {
             diagnosticSeverity = 'Warning',
           },
         },
-        ruby_lsp = {},
         rubocop = {},
         tsserver = {
           root_dir = vim.loop.cwd,
