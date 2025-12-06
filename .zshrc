@@ -118,40 +118,6 @@ kill-port() {
   sudo kill -9 $(sudo lsof -ti:$1)
 }
 
-ssh-to() {
-  if [[ "$1" == "dre-staging" ]]; then
-    ssh deploy@50.19.188.253
-  elif [[ "$1" == "dre-prod" ]]; then
-    ssh deploy@3.92.40.192
-  elif [[ "$1" == "22yards-staging" ]]; then
-    ssh deploy@13.201.85.8
-  elif [[ "$1" == "22yards-prod" ]]; then
-    ssh deploy@13.233.44.35
-  elif [[ "$1" == "geist-staging" ]]; then
-    ssh deploy@13.235.245.255
-  elif [[ "$1" == "cm-hosting" ]]; then
-    ssh deploy@143.110.181.11
-  elif [[ "$1" == "sci-prod" ]]; then
-    ssh deploy@54.93.62.209
-  elif [[ "$1" == "rr-prod" ]]; then
-    ssh deploy@13.233.166.168
-  elif [[ "$1" == "cwp-prod" ]]; then
-    ssh deploy@54.224.185.109
-  elif [[ "$1" == "technoserve-prod" ]]; then
-    ssh deploy@3.136.25.15
-  elif [[ "$1" == "civis-staging" ]]; then
-    cx ssh -s 'Civis API Staging' -e staging panther
-  elif [[ "$1" == "civis-prod" ]]; then
-    cx ssh -s 'Civis API Production' -e production hawk
-  elif [[ "$1" == "mentormind-staging" ]]; then
-    ssh deploy@15.206.178.30
-  elif [[ "$1" == "mentormind-prod" ]]; then
-    ssh deploy@13.234.155.178
-  else
-    echo "Hello, Stranger!"
-  fi
-}
-
 alias b="cd .."
 alias py="python3"
 alias vim="nvim"
@@ -161,37 +127,14 @@ alias c="clear"
 alias lg="lazygit"
 alias gs="git status"
 alias dc="docker compose"
-alias deg="docker exec -it gisapi-gisapi-1"
-alias debug="dc up -d && docker attach gisapi-gisapi-1"
-
-alias aiesec-prod="ssh -i '~/.ssh/aiesec-commutatus.pem' ec2-user@ec2-52-31-113-191.eu-west-1.compute.amazonaws.com"
-alias aiesec-stage="ssh -i ~/.ssh/aiesec-commutatus.pem ec2-user@52.16.200.62"
-alias auth-prod="ssh -i ~/.ssh/aiesec-commutatus.pem ec2-user@34.244.23.241"
-alias auth-stage="ssh -i ~/.ssh/aiesec-commutatus.pem ec2-user@52.16.170.149"
 
 export PATH="$HOME/.local/bin":$PATH
 export PATH="$HOME/go/bin":$PATH
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
-export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
-
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+export PATH="/opt/homebrew/opt/postgresql@18/bin:$PATH"
 export ANDROID_HOME=$HOME/Library/Android/sdk
-export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
-export PGGSSENCMODE="disable"
-export ES_JAVA_HOME=$JAVA_HOME
-
-eval "$(/opt/homebrew/bin/brew shellenv)"
-. ~/.asdf/plugins/java/set-java-home.zsh
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-source <(fzf --zsh)
-
-eval "$(gh copilot alias -- zsh)"
-
-# Added by Windsurf
-export PATH="/Users/mahaveersoni/.codeium/windsurf/bin:$PATH"
 
 # pnpm
 export PNPM_HOME="/Users/mahaveersoni/Library/pnpm"
@@ -201,5 +144,10 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-source "$HOME/.cargo/env"
-. "$HOME/.asdf/asdf.sh"
+eval "$(/opt/homebrew/bin/brew shellenv)"
+. ~/.asdf/plugins/java/set-java-home.zsh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+source <(fzf --zsh)
