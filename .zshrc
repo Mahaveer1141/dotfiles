@@ -145,7 +145,11 @@ esac
 # pnpm end
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# asdf plugins
 . ~/.asdf/plugins/java/set-java-home.zsh
+. ${ASDF_DATA_DIR:-$HOME/.asdf}/plugins/golang/set-env.zsh
+# asdf end
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
