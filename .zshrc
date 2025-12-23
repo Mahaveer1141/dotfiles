@@ -129,7 +129,6 @@ alias gs="git status"
 alias dc="docker compose"
 
 export PATH="$HOME/.local/bin":$PATH
-export PATH="$HOME/go/bin":$PATH
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
