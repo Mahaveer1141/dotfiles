@@ -122,7 +122,10 @@ return {
         ';e',
         function()
           local builtin = require('telescope.builtin')
-          builtin.diagnostics()
+          builtin.diagnostics({
+            wrap_results = true,
+            line_width = 'full',
+          })
         end,
         desc = 'Lists Diagnostics for all open buffers or a specific buffer',
       },
@@ -175,7 +178,7 @@ return {
         desc = 'Lists LSP incoming calls for word under the cursor',
       },
       {
-        'sf',
+        '<leader>sf',
         function()
           local telescope = require('telescope')
 
